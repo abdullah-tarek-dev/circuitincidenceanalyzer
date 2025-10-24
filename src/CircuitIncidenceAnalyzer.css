@@ -1,0 +1,372 @@
+/* ==============================
+   Analyzer Page - Polished Layout with Consistent Spacing
+   ============================== */
+
+.analyzer-container {
+  background: #ffffff;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  font-family: "Poppins", sans-serif;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+/* --- Titles --- */
+h2, h3 {
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-left: 5px solid #2563eb;
+  padding-left: 12px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-top: 40px;
+  border-left: 4px solid #3b82f6;
+  padding-left: 10px;
+}
+
+/* --- Input Section --- */
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.input-section label {
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.input-section input {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.input-section input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px #2563eb40;
+  outline: none;
+}
+
+.input-section button {
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.input-section button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.35);
+}
+
+/* --- Tables --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f8fafc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #e2e8f0;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+th {
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+tr:nth-child(even) {
+  background-color: #f1f5f9;
+}
+/* Grid section*/
+/* ===== ZB Section Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+/* كل عنصر داخل الشبكة */
+.grid > div {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.grid > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* التسمية (label) */
+.grid label {
+  display: block;
+  font-weight: 600;
+  color: #1e3a8a;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+/* حقل الإدخال */
+.grid input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* عند التركيز */
+.grid input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.25);
+}
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 600px) {
+  .grid {
+    gap: 10px;
+  }
+  .grid > div {
+    padding: 10px 8px;
+  }
+  .grid label {
+    font-size: 0.9rem;
+  }
+  .grid input {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+/* {Vectors}*/
+/* ===== EB & IB Section ===== */
+.vectors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 25px 0;
+  padding: 10px;
+}
+
+/* البطاقة الخاصة بكل فرع e0, e1, ... */
+.vector-row {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.vector-row:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* عنوان كل فرع */
+.vector-row span {
+  font-weight: 600;
+  color: #1e3a8a;
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* مدخلات EB و IB */
+.vector-row input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Placeholder */
+.vector-row input::placeholder {
+  color: #94a3b8;
+}
+
+/* عند التركيز */
+.vector-row input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.25);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .vectors {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .vector-row {
+    padding: 12px 10px;
+  }
+
+  .vector-row span {
+    font-size: 0.9rem;
+  }
+
+  .vector-row input {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+
+/* ===== Compute Button ===== */
+.compute-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 25px auto;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  transition: all 0.3s ease;
+}
+
+.compute-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+  transform: translateY(-2px);
+}
+
+.compute-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+}
+
+.compute-btn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+
+/* --- Results Section --- */
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.results > div {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  padding: 25px 20px;
+  transition: all 0.3s ease;
+}
+
+.results > div:hover {
+  transform: translateY(-3px);
+}
+
+.results pre {
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  font-family: "Courier New", monospace;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 992px) {
+  .analyzer-container {
+    padding: 30px 25px;
+    margin: 40px auto;
+  }
+  .input-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  .input-section input,
+  .input-section button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  table {
+    font-size: 0.85rem;
+  }
+  th, td {
+    padding: 8px 10px;
+  }
+  .results {
+    gap: 15px;
+  }
+}
+
