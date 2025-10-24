@@ -1,36 +1,6 @@
 import React, { useState } from "react";
-import {
-  matrix,
-  zeros,
-  identity,
-  multiply,
-  transpose,
-  inv,
-  concat,
-  add,
-  subtract,
-} from "mathjs";
+import { computeCircuitLogic } from "./Utils/circuitLogic";
 import "./CircuitIncidenceAnalyzer.css";
-
-function parentFactory(n) {
-  const p = Array.from({ length: n }, (_, i) => i);
-  const sz = Array.from({ length: n }, () => 1);
-  function find(x) {
-    if (p[x] === x) return x;
-    p[x] = find(p[x]);
-    return p[x];
-  }
-  function join(a, b) {
-    let pa = find(a);
-    let pb = find(b);
-    if (pa === pb) return false;
-    if (sz[pa] < sz[pb]) [pa, pb] = [pb, pa];
-    p[pb] = pa;
-    sz[pa] += sz[pb];
-    return true;
-  }
-  return { find, join };
-}
 
 function buildEmptyMatrix(r, c) {
   return Array.from({ length: r }, () => Array(c).fill(0));
@@ -76,73 +46,30 @@ export default function CircuitIncidenceAnalyzer() {
 
   function updateZBValue(i, value) {
     const newZB = ZB.map((row) => row.slice());
-     newZB[i][i] = value === "" ? "" : Number(value);
+    newZB[i][i] = value === "" ? "" : Number(value);
     setZB(newZB);
   }
 
   function updateVectorValue(matrix, setter, i, value) {
     const newMat = matrix.map((row) => row.slice());
-     newMat[i][0] = value === "" ? "" : Number(value);
+    newMat[i][0] = value === "" ? "" : Number(value);
     setter(newMat);
   }
 
   function compute() {
     try {
-      const uf = parentFactory(nodes);
-      const T = {};
-      const L = {};
-
-      for (let j = 0; j < edges; j++) {
-        let from = 0,
-          to = 0;
-        for (let i = 0; i < nodes; i++) {
-          if (A[i][j] === 1) from = i;
-          if (A[i][j] === -1) to = i;
-        }
-        if (uf.join(from, to)) T[j] = [from, to];
-        else L[j] = [from, to];
-      }
-
-      const AT = Array.from({ length: nodes - 1 }, () => []);
-      const AL = Array.from({ length: nodes - 1 }, () => []);
-
-      for (let j = 0; j < edges; j++) {
-        for (let i = 0; i < nodes - 1; i++) {
-          (T[j] ? AT[i] : AL[i]).push(A[i][j]);
-        }
-      }
-
-      const ATm = matrix(AT);
-      const ALm = matrix(AL);
-      const CL = multiply(inv(ATm), ALm);
-      const C = concat(identity(nodes - 1), CL, 1);
-      const BL = transpose(multiply(CL, -1));
-      const B = concat(BL, identity(BL.size()[0]), 1);
-
-      const ZBm = matrix(ZB),
-        EBm = matrix(EB),
-        IBm = matrix(IB);
-      const BT = transpose(B);
-      const BEB_BZBIB = subtract(
-        multiply(B, EBm),
-        multiply(B, multiply(ZBm, IBm))
-      );
-      const IL = multiply(inv(multiply(B, multiply(ZBm, BT))), BEB_BZBIB);
-      const JB = multiply(BT, IL);
-      const VB = subtract(multiply(ZBm, add(JB, IBm)), EBm);
-
-      setResults({
-        T: Object.keys(T),
-        L: Object.keys(L),
-        B: B.toArray(),
-        C: C.toArray(),
-        JB: JB.toArray(),
-        VB: VB.toArray(),
-      });
+      const result = computeCircuitLogic(nodes, edges, A, ZB, EB, IB);
+      setResults(result);
     } catch (e) {
       alert("Error during computation: " + e.message);
     }
   }
+
+  // 🔍 نتحقق هل المستخدم أدخل أي قيمة في ZB أو EB أو IB
+  const hasBranchValues =
+    ZB.some((r, i) => r[i] !== 0 && r[i] !== "") ||
+    EB.some((r) => r[0] !== 0 && r[0] !== "") ||
+    IB.some((r) => r[0] !== 0 && r[0] !== "");
 
   const renderMatrixTable = (matrixData) => (
     <table className="result-table">
@@ -166,21 +93,21 @@ export default function CircuitIncidenceAnalyzer() {
         <label>
           Nodes:
           <input
-    type="number"
-    value={nodes === 0 ? "" : nodes}
-    onChange={(e) =>
-      setNodes(e.target.value === "" ? 0 : Number(e.target.value))
-    }
+            type="number"
+            value={nodes === 0 ? "" : nodes}
+            onChange={(e) =>
+              setNodes(e.target.value === "" ? 0 : Number(e.target.value))
+            }
           />
         </label>
         <label>
           Edges:
           <input
-   type="number"
-    value={edges === 0 ? "" : edges}
-    onChange={(e) =>
-      setEdges(e.target.value === "" ? 0 : Number(e.target.value))
-    }
+            type="number"
+            value={edges === 0 ? "" : edges}
+            onChange={(e) =>
+              setEdges(e.target.value === "" ? 0 : Number(e.target.value))
+            }
           />
         </label>
         <button onClick={handleBuildMatrix}>Create Matrix</button>
@@ -268,18 +195,19 @@ export default function CircuitIncidenceAnalyzer() {
 
       {results && (
         <div className="results">
-          <h2>Results</h2>
-          <p>
-            🌿 Tree Branches: <strong>{results.T.join(", ")}</strong>
-          </p>
-          <p>
-            🔗 Link Branches: <strong>{results.L.join(", ")}</strong>
-          </p>
-
-          {["B", "C", "JB", "VB"].map((key) => (
+          {/* 👇 عرض فقط B و C دائمًا */}
+          {["B", "C"].map((key) => (
             <div key={key} className="result-card">
               <h3>{key} Matrix</h3>
               {renderMatrixTable(results[key])}
+            </div>
+          ))}
+
+          {/* 👇 عرض JB و VB فقط لو المستخدم دخل قيم في ZB أو EB أو IB */}
+          {hasBranchValues && ["JB", "VB"].map((key) => (
+            <div key={key} className="result-card">
+              <h3>{key} Matrix</h3>
+              {results[key] && renderMatrixTable(results[key])}
             </div>
           ))}
         </div>

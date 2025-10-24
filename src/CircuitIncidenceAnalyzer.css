@@ -308,18 +308,20 @@ tr:nth-child(even) {
 
 /* --- Results Section --- */
 .results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); */
   gap: 25px;
-  margin-top: 40px;
+  margin: 40px 0;
 }
 
 .results > div {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   padding: 25px 20px;
   transition: all 0.3s ease;
+  margin: 40px 0;
 }
 
 .results > div:hover {
