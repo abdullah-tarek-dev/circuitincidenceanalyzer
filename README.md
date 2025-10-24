@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# ⚡ Circuit Incidence Analyzer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based tool to analyze electrical circuits using **incidence matrix methods**.  
+It calculates **Tree and Link branches**, builds the **B** and **C** matrices, and computes **JB** and **VB** results using linear algebra operations — all directly in the browser.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- Interactive UI for defining:
+  - Number of **nodes** and **edges**
+  - **Incidence Matrix [A]**
+  - **Branch Resistances [ZB]**
+  - **Voltages [EB]** and **Currents [IB]**
+- Automatic selection of **tree** and **link** branches using Union-Find algorithm
+- Real-time computation of:
+  - Matrices: `A_T`, `A_L`, `B`, `C`
+  - Results: `JB` (branch currents) and `VB` (branch voltages)
+- Fully responsive design with modern CSS
+- Built with React Hooks and [math.js](https://mathjs.org/) for matrix operations
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧩 Tech Stack
 
-### `npm test`
+- **React 18**
+- **JavaScript (ES6+)**
+- **mathjs** — for advanced matrix operations
+- **CSS3** — responsive and clean design
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Installation & Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**
+   ```bash
+   git clone(https://github.com/abdullah-tarek-dev/CircuitIncidenceAnalyzer.git)
+   cd circuit-incidence-analyzer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   Install dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run the development server
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Open your browser
 
-## Learn More
+http://localhost:3000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  🧮 How to Use
 
-### Code Splitting
+Enter the number of Nodes and Edges, then click Create Matrix.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Fill in the Incidence Matrix [A] (1 for outgoing, -1 for incoming).
 
-### Analyzing the Bundle Size
+Set branch resistances (ZB), voltages (EB), and currents (IB).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Click Compute Results.
 
-### Making a Progressive Web App
+View computed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Tree & Link branches
 
-### Advanced Configuration
+B, C, JB, VB matrices (with formatted tables)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
